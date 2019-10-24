@@ -1,0 +1,4 @@
+
+for i=1:CLUSTERS
+    centroids(i,:)=events(round(rand*(size(events,1))),:); 
+end
