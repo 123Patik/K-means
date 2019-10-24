@@ -1,18 +1,18 @@
 function clustered=k_means(X, CLUSTERS)
 for i=1:CLUSTERS
-    centroids(i,:)=X(round(1+rand*(size(X,1)-1)),:); % -1/+1 for  zero index Problem!
+    centroids(i,:)=X(round(rand*(size(X,1))),:); 
 end
 
-idx=zeros(size(X,1),1);
-idx_old=ones(size(X,1),1);
-while sum((idx_old==idx)==0)>0 
-    idx_old=idx;
+index=zeros(size(X,1),1);
+index_old=ones(size(X,1),1);
+while sum((idex_old==idx)==0)>0 
+    index_old=idx;
     %cluster assignment
     for i=1:size(X,1) 
         for j=1:size(centroids,1)   
-            dist(j)=sqrt(sum((X(i,:)-centroids(j,:)).^2)); %Euclidian distance
+            dist(j)=sqrt(sum((X(i,:)-centroids(j,:)).^2));
         end
-        [~,idx(i,1)]=min(dist);           
+        [~,index(i,1)]=min(dist);           
     end
     
 end
