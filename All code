@@ -1,0 +1,26 @@
+function clustered=k_means(X, CLUSTERS)
+
+%random Initialization
+for i=1:CLUSTERS
+    centroids(i,:)=X(round(1+rand*(size(X,1)-1)),:); % -1/+1 for  zero index Problem!
+end
+
+idx=zeros(size(X,1),1);
+idx_old=ones(size(X,1),1);
+while sum((idx_old==idx)==0)>0 
+    idx_old=idx;
+    %cluster assignment
+    for i=1:size(X,1) 
+        for j=1:size(centroids,1)   
+            dist(j)=sqrt(sum((X(i,:)-centroids(j,:)).^2)); %Euclidian distance
+        end
+        [~,idx(i,1)]=min(dist);           
+    end
+    %move centroids
+    for i=1:size(centroids,1)
+        centroids(i,:)= mean(X(idx==i,:),1) ;             
+    end    
+end
+clustered=[X,idx];
+
+
